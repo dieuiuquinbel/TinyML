@@ -1,0 +1,114 @@
+             BỘ XÂY DỰNG		            CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM
+TRƯỜNG ĐH KIẾN TRÚC HN 		             Độc lập - Tự do - Hạnh phúc
+
+Hà Nội, ngày   05   tháng  9    năm 2026
+ĐỀ CƯƠNG ĐỀ TÀI NGHIÊN CỨU KHOA HỌC SINH VIÊN
+             
+Thông tin chung
+Tên đề tài: Nghiên cứu mô hình TinyML cho phát hiện rối loạn nhịp tim theo thời gian thực trên thiết bị biên
+Nhóm sinh viên thực hiện: Vũ Đình Quốc Đạt 		Nguyễn Xuân Diệu
+Trần Duy Hoàng		Nguyễn Duy Hiệp
+Lớp: 2023CN4
+Khoa/Viện: Công nghệ thông tin 
+Giảng viên hướng dẫn: TS.
+Nguyễn Việt Hưng
+
+Nội dung đề cương
+Giới thiệu đề tài
+Lý do chọn đề tài / Tính cấp thiết 
+Rối loạn nhịp tim là bệnh lý nguy hiểm thường xuất hiện kịch phát, đòi hỏi phải theo dõi điện tâm đồ (ECG) liên tục qua thiết bị đeo cá nhân.
+Tuy nhiên, việc truyền liên tục toàn bộ dữ liệu thô lên đám mây (Cloud) gây tiêu hao nhiều năng lượng pin, phụ thuộc kết nối mạng và tiềm ẩn nguy cơ rò rỉ dữ liệu y tế riêng tư
+Công nghệ TinyML cho phép thực thi trực tiếp các mô hình học sâu đã tối ưu trên vi điều khiển công suất thấp, giúp thiết bị tự động phân tích tín hiệu tại chỗ và phát tín hiệu hỗ trợ cảnh báo sớm khi xuất hiện bất thường..
+Từ yêu cầu thực tiễn đó, nhóm thực hiện đề tài: “Nghiên cứu mô hình TinyML cho phát hiện rối loạn nhịp tim theo thời gian thực trên thiết bị biên”. mang tính cấp thiết và giá trị ứng dụng thực tiễn cao
+Tổng quan vấn đề nghiên cứu 
+Các mô hình học sâu truyền thống (1D-CNN, LSTM) đạt độ chính xác cao nhưng dung lượng lớn (hàng chục MB), vượt xa khả năng của vi điều khiển có RAM nhỏ.
+Gần đây, nghiên cứu của Bùi An Đông và cộng sự (2025) đã ứng dụng TinyML cho bài toán phát hiện đỉnh nhịp tim (Beat Detection).
+Kế thừa và mở rộng hướng tiếp cận này, đề tài tập trung giải quyết bài toán toàn diện hơn: xây dựng chuỗi phân loại rối loạn nhịp tim hoàn chỉnh từ đầu đến cuối (End-to-End), phân loại 5 nhóm nhịp theo chuẩn AAMI, tối ưu hóa lượng tử hóa INT8 và đánh giá chi tiết giới hạn tài nguyên thực tế (tensor_arena và Flash) trên vi điều khiển ESP32-S3.
+Mục tiêu nghiên cứu
+Mục tiêu chung 
+Nghiên cứu, tối ưu hóa và thực nghiệm mô hình TinyML phân loại 5 nhóm nhịp tim theo chuẩn AAMI từ tín hiệu ECG thời gian thực trên vi điều khiển ESP32-S3, thiết bị có cấu hình thấp, chi phí rẻ, độ chính xác cao, tối ưu bộ nhớ,  thời gian suy luận nhanh và tiêu thụ ít năng lượng.
+Mục tiêu cụ thể 
+Tiền xử lý tín hiệu: Xây dựng giải thuật lọc nhiễu dải 0.5–45 Hz và thuật toán Pan-Tompkins tách từng nhịp tim ECG phù hợp cho tính toán nhúng.
+Thiết kế mô hình nhẹ: Xây dựng mạng 1D-CNN tinh gọn, xử lý mất cân bằng dữ liệu để đạt chỉ số Macro-F1 ≥85% và F1 lớp ngoại tâm thu thất (V) ≥85% trên tập dữ liệu kiểm thử MIT-BIH.
+Lượng tử hóa INT8: Nén mô hình sang định dạng TensorFlow Lite INT8 với mức suy giảm hiệu năng không quá 3% so với mô hình gốc FP32.
+Thực nghiệm nhúng trên ESP32-S3: Triển khai mô hình bằng TensorFlow Lite for Microcontrollers; đo đạc chính xác kích thước Flash, đỉnh RAM chiếm dụng (tensor_arena <50" KB" ), và thời gian suy luận dưới 100" ms/nhịp" .
+Đối tượng và phạm vi nghiên cứu
+Đối tượng nghiên cứu 
+Tín hiệu điện tâm đồ (ECG), giải thuật xử lý tín hiệu số y sinh, mạng 1D-CNN, kỹ thuật lượng tử hóa INT8 và vi điều khiển ESP32-S3.
+Phạm vi nghiên cứu (không gian, thời gian, nội dung)
+Không gian: Phòng thí nghiệm Khoa CNTT - Trường ĐH Kiến trúc Hà Nội; sử dụng tập dữ liệu chuẩn MIT-BIH Arrhythmia Database từ PhysioNet để huấn luyện, kiểm thử và đánh giá mô hình.
+Thời gian: Dự kiến thực hiện trong 9 tháng, từ tháng 9/2026 đến tháng 6/2027.
+Nội dung và Phần cứng : Tập trung phân loại 5 nhóm nhịp tim theo chuẩn AAMI (N, S, V, F, Q) trên vi điều khiển ESP32-S3.
+Tín hiệu ECG kiểm thử được nạp vào vi điều khiển bằng cơ chế phát lại (Signal Playback) theo đúng chu kỳ thời gian thực (kết hợp mở rộng thử nghiệm với module cảm biến ECG AD8232).
+Đề tài dừng ở mức chứng minh tính khả thi (proof-of-concept), không thử nghiệm lâm sàng trên người.
+Phương pháp nghiên cứu
+Quá trình nghiên cứu của đề tài được thực hiện tuần tự qua 3 giai đoạn:
+Giai đoạn 1 – (Chuẩn bị và tiền xử lý dữ liệu chuẩn): Sử dụng cơ sở dữ liệu MIT-BIH Arrhythmia.
+Để tránh rò rỉ dữ liệu (Data Leakage), nhóm phân chia tập Train/Val/Test theo từng bản ghi bệnh nhân độc lập (theo quy chuẩn Chazal et al.) trước khi cắt nhịp.
+Tín hiệu được lọc thông dải 0.5 – 45 Hz để khử nhiễu đường nền và nhiễu cơ học; áp dụng giải thuật Pan-Tompkins để trích xuất các đỉnh sóng R, cắt thành các đoạn nhịp 180 mẫu và chuẩn hóa biên độ về khoảng  QUOTE  .
+Giai đoạn 2 (Thiết kế, huấn luyện và lượng tử hóa mô hình TinyML): Thiết kế mạng 1D-CNN cấu hình siêu nhẹ trên TensorFlow/Keras.
+Sử dụng kỹ thuật gán trọng số lớp (Class Weights) và kỹ thuật tăng cường dữ liệu chỉ học trên tập Train để xử lý mất cân bằng mẫu.
+Mô hình được huấn luyện lặp lại 3 lần với các random seed khác nhau để báo cáo giá trị trung bình và độ lệch chuẩn.
+Sau đó, áp dụng kỹ thuật Post-Training INT8 Quantization để nén mô hình và đánh giá mức suy giảm hiệu năng so với mô hình FP32 gốc.
+Giai đoạn 3 - Thực nghiệm và đo đạc trên phần cứng ESP32-S3: Chuyển đổi mô hình INT8 thành mảng byte C (.h) và nạp vào vi điều khiển ESP32-S3 qua TensorFlow Lite for Microcontrollers.
+Nhóm tiến hành: (1) Đánh giá hiệu năng học máy (Macro-F1, F1 từng lớp S, V, Sensitivity, Specificity, Confusion Matrix); (2) Đo lường tài nguyên phần cứng gồm thời gian suy luận (Inference Latency ms/nhịp), dung lượng Flash tĩnh, bộ nhớ RAM đỉnh (tensor_arena) và công suất tiêu thụ điện.
+Dự kiến kết quả nghiên cứu (yêu cầu bắt buộc)
+Mô hình TinyML tối ưu: File mô hình .tflite INT8 có kích thước  QUOTE  , chỉ số Macro-F1 trên tập kiểm tra độc lập  QUOTE  , F1 lớp ngoại tâm thu thất (V)  QUOTE  , độ suy giảm hiệu năng so với FP32  QUOTE  .
+Nguyên mẫu nhúng trên ESP32-S3: Hệ thống hoạt động ổn định với cơ chế phát lại dữ liệu thời gian thực; thời gian suy luận <100" ms/nhịp" ; bộ nhớ RAM chiếm dụng cho tensor_arena <50" KB" ; bộ nhớ Flash <100" KB" .
+Báo cáo và mã nguồn: Báo cáo khoa học hoàn chỉnh kèm toàn bộ mã nguồn tiền xử lý dữ liệu, huấn luyện Python và chương trình nhúng C++ trên ESP32-S3.
+Kế hoạch thực hiện, phân công nhiệm vụ và quản lý rủi ro 
+ Kế hoạch thực hiện (Tiến độ 9 tháng: 09/2026 – 05/2027): 
+Tháng 9 – 10/2026: Nghiên cứu tổng quan về TinyML và cơ sở dữ liệu MIT-BIH; xây dựng quy trình tiền xử lý tín hiệu ECG gồm bộ lọc thông dải 0.5–45 Hz, giải thuật Pan-Tompkins phát hiện đỉnh R và cắt nhịp theo phân chia bệnh nhân độc lập (Inter-patient). ( Cả nhóm cùng thực hiện )
+Tháng 11 – 12/2026: Thiết kế kiến trúc mạng nơ-ron 1D-CNN siêu nhẹ trên TensorFlow/Keras; áp dụng kỹ thuật gán trọng số lớp để xử lý mất cân bằng mẫu và huấn luyện mô hình phân loại 5 nhóm nhịp theo chuẩn AAMI.
+Người tham gia : Vũ Đình Quốc Đạt , Nguyễn Xuân Diệu thực hiện 
+Tháng 1 – 2/2027: Tối ưu và nén mô hình bằng kỹ thuật lượng tử hóa sau huấn luyện (Post-Training INT8 Quantization) sang định dạng TensorFlow Lite (.tflite); kiểm thử và đánh giá mức suy giảm hiệu năng so với mô hình FP32 gốc.
+Người tham gia : Trần Duy Hoàng , Vũ Đình Quốc Đạt thực hiện 
+Tháng 3 – 4/2027: Chuyển đổi mô hình thành mảng C và nạp lên vi điều khiển ESP32-S3 qua framework TensorFlow Lite for Microcontrollers; thực nghiệm đo đạc độ trễ suy luận, bộ nhớ Flash, RAM đỉnh (tensor_arena) và điện năng tiêu thụ qua cơ chế phát lại dữ liệu.
+Người tham gia : Nguyễn Duy Hiệp và Nguyễn Xuân Diệu thực hiện 
+Tháng 5/2027: Đánh giá tổng hợp toàn diện hiệu năng hệ thống, đóng gói bộ mã nguồn chương trình, hoàn thiện báo cáo tổng kết đề tài NCKH và chuẩn bị nghiệm thu.
+Người tham gia : Trần Duy Hoàng , Nguyễn Duy Hiệp thực hiện 
+Danh mục thiết bị & Kinh phí:
+Kit phần cứng: 02 Kit vi điều khiển ESP32-S3 (sử dụng thiết bị sẵn có từ phòng lab và GVHD hỗ trợ), 01 module cảm biến ECG AD8232 và điện cực đo.
+Phần mềm: Môi trường mã nguồn mở (Python, TensorFlow, VS Code / ESP-IDF / PlatformIO).
+Phân tích rủi ro & Phương án dự phòng:
+Rủi ro 1 (Tràn bộ nhớ RAM tensor_arena khi nạp vào ESP32-S3): Giảm bớt số kênh tích chập (Filters) ở các layer đầu, áp dụng tích chập tách biệt theo chiều sâu (Depthwise Separable 1D-CNN) để giảm kích thước tensor trung gian.
+Rủi ro 2 (Độ nhạy phân loại các lớp hiếm như S, V bị thấp): Sử dụng hàm mất mát Focal Loss hoặc kết hợp kỹ thuật tổng hợp mẫu SMOTE trên tập Train.
+Tài liệu tham khảo chính
+Tài liệu tiếng Anh:
+Lin, J., Zhu, L., Chen, W.
+M., Wang, W.
+C., & Han, S. (2024).
+Tiny Machine Learning: Progress and Futures. arXiv:2403.19076.
+Link: HYPERLINK "https://arxiv.org/abs/2403.19076"https://arxiv.org/abs/2403.19076
+Han, H., Trimi, S., & Lee, S.
+M. (2025).
+Tiny Machine Learning (TinyML): Research trends and future application opportunities.
+Array (Elsevier), 25, 100674.
+Link: HYPERLINK "https://doi.org/10.1016/j.array.2025.100674"https://doi.org/10.1016/j.array.2025.100674
+Luong, D., et al. (2024).
+TinyML-Based System for Cost-Effective ECG Rhythm Classification on Embedded Device.
+IEEE ATC, pp. 209-214.
+Link: HYPERLINK "https://ieeexplore.ieee.org/document/10908303"https://ieeexplore.ieee.org/document/10908303
+Tài liệu tiếng Việt:
+Bùi An Đông, Trần Hoàng Đạt, & Ngô Hoàng Anh Vy. (2025).
+Harnessing TinyML for Accurate ECG Beat Detection.
+IEEE ICDV, pp. 13-18.
+Link: HYPERLINK "https://ieeexplore.ieee.org/document/11135036"https://ieeexplore.ieee.org/document/11135036
+Nguyễn Như Tú. (2024).
+Nghiên cứu ứng dụng công nghệ học máy TinyML cho mạng các thiết bị tài nguyên hạn chế IoT.
+Luận văn Thạc sĩ, ĐH CNTT&TT - ĐH Thái Nguyên.
+Link: HYPERLINK "https://repository.ictu.edu.vn/luan-van/nghien-cuu-ung-dung-cong-nghe-hoc-may-tinyml-cho-mang-cac-thiet-bi-tai-nguyen-han-che-iot/"https://repository.ictu.edu.vn/luan-van/nghien-cuu-ung-dung-cong-nghe-hoc-may-tinyml-cho-mang-cac-thiet-bi-tai-nguyen-han-che-iot/
+Nguồn dữ liệu mở (Dataset):
+PhysioNet - Kho dữ liệu tín hiệu y sinh chuẩn quốc tế (MIT-BIH Arrhythmia Database & PTB-XL ECG Database).
+Link: HYPERLINK "https://physionet.org/"https://physionet.org/
+
+  Lãnh đạo Khoa	             Giảng viên hướng dẫn                  Đại diện nhóm sinh viên
+  (Ký tên)                                            (Ký tên)                                             (Ký tên)
+
+
+
+
+PAGE  3
+
+
+

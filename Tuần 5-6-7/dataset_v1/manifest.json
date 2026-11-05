@@ -1,0 +1,33 @@
+{
+  "dataset_name": "ECG_AAMI_Dataset_v1_reference_aligned",
+  "source_dataset": "Tuần 5-6-7\\ket_qua_tuan_6\\aami_reference_aligned.npz",
+  "classes": [
+    "N",
+    "S",
+    "V",
+    "F",
+    "Q"
+  ],
+  "beat_samples": 180,
+  "r_peak_index": 90,
+  "filter": {
+    "type": "Butterworth zero-phase bandpass",
+    "hz": [
+      0.5,
+      45.0
+    ],
+    "order": 2
+  },
+  "split_file": "Tuần 5-6-7\\ket_qua_tuan_6\\split_train_val_test.csv",
+  "normalization_file": "normalization.json",
+  "split_sizes": {
+    "train": 43744,
+    "val": 9402,
+    "test": 47562
+  },
+  "notes": [
+    "Reference-aligned data is for classifier evaluation.",
+    "Detector-aligned data remains in ket_qua_tuan_6 for later end-to-end evaluation.",
+    "Paced records 102, 104, 107, 217 are excluded."
+  ]
+}

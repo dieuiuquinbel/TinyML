@@ -1,0 +1,14 @@
+﻿check,passed,detail
+train: đúng 180 mẫu/nhịp,True,"(43744, 180)"
+train: không có NaN/Inf,True,finite=7873920/7873920
+train: nhãn hợp lệ,True,"[np.str_('F'), np.str_('N'), np.str_('Q'), np.str_('S'), np.str_('V')]"
+train: record đúng split,True,"[np.str_('106'), np.str_('108'), np.str_('109'), np.str_('112'), np.str_('114'), np.str_('115'), np.str_('116'), np.str_('119'), np.str_('122'), np.str_('124'), np.str_('201'), np.str_('202'), np.str_('203'), np.str_('207'), np.str_('208'), np.str_('209'), np.str_('215'), np.str_('220'), np.str_('230')]"
+val: đúng 180 mẫu/nhịp,True,"(9402, 180)"
+val: không có NaN/Inf,True,finite=1692360/1692360
+val: nhãn hợp lệ,True,"[np.str_('F'), np.str_('N'), np.str_('Q'), np.str_('S'), np.str_('V')]"
+val: record đúng split,True,"[np.str_('101'), np.str_('118'), np.str_('205'), np.str_('223')]"
+test: đúng 180 mẫu/nhịp,True,"(47562, 180)"
+test: không có NaN/Inf,True,finite=8561160/8561160
+test: nhãn hợp lệ,True,"[np.str_('F'), np.str_('N'), np.str_('Q'), np.str_('S'), np.str_('V')]"
+test: record đúng split,True,"[np.str_('100'), np.str_('103'), np.str_('105'), np.str_('111'), np.str_('113'), np.str_('117'), np.str_('121'), np.str_('123'), np.str_('200'), np.str_('210'), np.str_('212'), np.str_('213'), np.str_('214'), np.str_('219'), np.str_('221'), np.str_('222'), np.str_('228'), np.str_('231'), np.str_('232'), np.str_('233'), np.str_('234')]"
+Không giao nhau bệnh nhân giữa ba split,True,train∩val=train∩test=val∩test=∅

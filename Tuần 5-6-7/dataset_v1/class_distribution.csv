@@ -1,0 +1,16 @@
+﻿split,AAMI_class,beats
+train,N,39277
+train,S,824
+train,V,3247
+train,F,390
+train,Q,6
+val,N,8640
+val,S,175
+val,V,560
+val,F,25
+val,Q,2
+test,N,42185
+test,S,1782
+test,V,3201
+test,F,387
+test,Q,7

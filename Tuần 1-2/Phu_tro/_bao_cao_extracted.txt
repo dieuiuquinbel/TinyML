@@ -1,0 +1,30 @@
+BÁO CÁO TIẾN ĐỘ ĐỀ TÀI NCKH (2 TUẦN ĐẦU)
+Đề tài: Nghiên cứu mô hình TinyML cho phát hiện rối loạn nhịp tim theo thời gian thực trên thiết bị biên
+Thời gian báo cáo: Giai đoạn từ 11/09/2026 đến 26/09/2026
+Nhóm sinh viên thực hiện: Vũ Đình Quốc Đạt, Nguyễn Xuân Diệu, Trần Duy Hoàng, Nguyễn Duy Hiệp (Lớp 2023CN4)
+Giảng viên hướng dẫn: TS. Nguyễn Việt Hưng
+Kính gửi: Thầy TS. Nguyễn Việt Hưng
+Em Nguyễn Xuân Diệu thay mặt nhóm gửi Thầy báo cáo tiến độ trong 2 tuần của nhóm đề tài TinyML:
+1. Công việc nhóm đã thực hiện trong 2 tuần bao gồm:
+Về tìm hiểu học thuật và công cụ:
+• Tìm hiểu tổng quan về TinyML và các ràng buộc tài nguyên khi triển khai lên vi điều khiển ESP32-S3 (giới hạn RAM, Flash và yêu cầu nén mô hình sau này).
+• Cài đặt môi trường Python và tìm hiểu cách sử dụng các thư viện chính: wfdb (đọc dữ liệu y sinh PhysioNet), scipy.signal (thiết kế bộ lọc số), numpy và matplotlib để xử lý mảng và vẽ đồ thị.
+Về bộ dữ liệu MIT-BIH (Tải và xử lý định dạng):
+• Tải trọn bộ 48 bản ghi của cơ sở dữ liệu MIT-BIH Arrhythmia Database về máy.
+• Đọc hiểu cấu trúc 3 tệp tin của từng ca bệnh: file tín hiệu thô 2 kênh (.dat), file header chứa thông số tần số lấy mẫu 360 Hz và độ lợi gain (.hea), file chú giải vị trí nhịp của bác sĩ (.atr).
+• Khảo sát kênh đo: Thống nhất trích xuất tín hiệu trên kênh đạo trình chính MLII (Modified Lead II) vì thể hiện rõ nhất phức bộ sóng P-QRS-T.
+Hình 1: Dạng sóng tín hiệu 2 kênh (MLII, V5) và các nhãn nhịp bóc tách từ bản ghi 100
+• Tìm hiểu quy tắc ánh xạ nhãn: Chuyển đổi các ký hiệu nhịp bệnh lý của MIT-BIH sang 5 nhóm chuẩn AAMI (N, S, V, F, Q).
+Hình 2: Biểu đồ thống kê số lượng và tỷ lệ phân bố 5 nhóm nhịp theo chuẩn AAMI
+Về xây dựng bước đầu bộ lọc dữ liệu:
+• Khảo sát các dạng nhiễu trên tín hiệu thô: thấy rõ hiện tượng trôi đường nền (do hô hấp, tần số < 0.5 Hz) và nhiễu cơ/nhiễu nguồn tần số cao (> 45 Hz).
+• Thiết kế và code thử nghiệm bộ lọc thông dải Bandpass (0.5 – 45 Hz) bằng hàm lọc số của thư viện scipy.
+• Thử nghiệm trên các bản ghi mẫu (như bản ghi 100, 101): kết quả bước đầu đã khử được hiện tượng uốn lượn của đường nền, đưa tín hiệu về dao động quanh mức 0 mà vẫn giữ nguyên dạng đỉnh sóng R.
+Hình 3: Kết quả lọc thông dải Bandpass (0.5 – 45 Hz) khử trôi đường nền trên bản ghi 100
+2. Khó khăn, vướng mắc:
+Giai đoạn đầu nhóm chủ yếu tìm hiểu tài liệu, làm quen thư viện và chuẩn bị dữ liệu nên tiến độ vẫn thuận lợi, hiện chưa gặp vướng mắc gì ạ.
+3. Tuần tới định làm gì?
+• Hoàn thiện code bộ lọc để chạy tự động và lưu dữ liệu sạch cho toàn bộ 48 bản ghi.
+• Tìm hiểu và cài đặt thuật toán Pan-Tompkins để bắt đỉnh sóng R, sau đó thử nghiệm cắt tín hiệu thành từng đoạn nhịp riêng lẻ (180 mẫu/nhịp).
+• Tìm hiểu phương pháp chia tập Train/Test theo từng bệnh nhân độc lập (inter-patient split) để tránh rò rỉ dữ liệu giữa tập học và tập kiểm thử.
+Nhóm gửi Thầy xem qua tiến độ ạ. Em cảm ơn Thầy!
